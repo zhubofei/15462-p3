@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq libscene.a  CMakeFiles/scene.dir/material.cpp.o CMakeFiles/scene.dir/mesh.cpp.o CMakeFiles/scene.dir/model.cpp.o CMakeFiles/scene.dir/scene.cpp.o CMakeFiles/scene.dir/sphere.cpp.o CMakeFiles/scene.dir/triangle.cpp.o CMakeFiles/scene.dir/ray.cpp.o CMakeFiles/scene.dir/meshtree.cpp.o CMakeFiles/scene.dir/texture.cpp.o CMakeFiles/scene.dir/bound.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libscene.a

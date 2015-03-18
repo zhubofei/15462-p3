@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar cq libapplication.a  CMakeFiles/application.dir/application.cpp.o CMakeFiles/application.dir/camera_roam.cpp.o CMakeFiles/application.dir/imageio.cpp.o CMakeFiles/application.dir/scene_loader.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libapplication.a
