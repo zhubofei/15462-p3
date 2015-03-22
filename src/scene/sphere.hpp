@@ -11,6 +11,7 @@
 
 #include "scene/scene.hpp"
 
+
 namespace _462 {
 
 /**
@@ -26,9 +27,9 @@ public:
     Sphere();
     virtual ~Sphere();
     virtual void render() const;
+    virtual Intersection intersect (Ray&) const;
 };
 
 } /* _462 */
 
 #endif /* _462_SCENE_SPHERE_HPP_ */
-

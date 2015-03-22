@@ -54,9 +54,20 @@ bool Raytracer::initialize(Scene* scene, size_t num_samples,
 }
 
 //compute ambient lighting
-Color3 Raytracer::trace_ray(Ray &ray/*maybe some more arguments*/){
-    //TODO: render something more interesting
-    return Color3(fabs(sin(10*ray.d.x)),fabs(10*cos(ray.d.y)),fabs(10*tan(ray.d.y)));
+Color3 Raytracer::trace_ray(Ray &ray, size_t depth)
+{
+    if (depth > MAX_DEPTH)
+      return scene->background_color;
+
+    Geometry* const* geometries = scene->get_geometries();
+    const size_t N = scene->num_geometries();
+
+    Intersection intersection;
+    intersection.is_intersect = false;
+
+    for(size_t i=0; i<N; i++) {
+      
+    }
 }
 
 /**

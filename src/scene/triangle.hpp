@@ -39,6 +39,7 @@ public:
     Triangle();
     virtual ~Triangle();
     virtual void render() const;
+    virtual Intersection intersect (Ray&) const;
 };
 
 

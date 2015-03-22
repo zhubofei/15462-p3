@@ -112,6 +112,7 @@ bool solve_quadratic(real_t *x1,real_t *x2, real_t a, real_t b, real_t c){
         return true;
     }
 }
+
 //solve a quadratic equation, and then return the smallest solution larger than EPS
 //if there is no solution, return -1
 real_t solve_time(real_t a,real_t b,real_t c){
@@ -128,5 +129,58 @@ real_t solve_time(real_t a,real_t b,real_t c){
     }
     return -1;
 }
-} /* _462 */
 
+// intersect test
+Intersect Sphere::intersect(Ray& ray) const
+{
+  Intersection itn;
+  itn.is_intersect = false;
+
+  Vector3 d = normalize(invMat.transform_vector(ray.d));
+  Vector3 e = invMat.transform_point(ray.e);
+
+  // ABCs
+  real_t a = dot(d, d);
+  real_t b = 2 * dot(d, e);
+  real_t c = dot(e, e) - radius * radius;
+
+  real_t t = solve_time(a, b, c);
+
+  // if the discriminant is negative,
+  // its square root is imaginary and the line and sphere do not intersect
+  if (t < 0.0) {
+    return itn;
+  } else {
+    // normal matrix
+    Matrix4 invMat_inv;
+    make_transformation_matrix(&invMat_inv, position, orientation, scale);
+
+    // intersection points
+    Vector3 r = e + t * d;
+    Vector3 p = invMat_inv.transform_point(e + t * d);
+
+    itn.is_intersect = true;
+    itn.position = p;
+    itn.normal = normalize(normMat * (e + t * d));
+
+    itn.ambient = material->ambient;
+    itn.diffuse = material->diffuse;
+    itn.specular = material->specular;
+    itn.refractive_index = material->refractive_index;
+
+    if (material->texture_filename.empty()) { // no texture
+      itn.texture = Color3::White();
+    } else {
+      real_t theta = acos(r.z);
+      real_t phi = atan2(r.y, r.x);
+      real_t u = phi/2.0/PI;
+      real_t v = (PI - theta) / PI;
+      int width, height;
+      material->get_texture_size(&width, &height);
+      itn.texture = material->get_texture_pixel
+                       ((int)(u * (real_t)(width)), (int)(v * (real_t)(height)));
+    }
+    return itn;
+  }
+}
+} /* _462 */

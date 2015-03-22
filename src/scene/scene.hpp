@@ -23,11 +23,20 @@
 namespace _462 {
 class Geometry;
 
+
 //represents an intersection between a ray and a geometry
 struct Intersection{
+  bool is_intersect;
+  Vector3 position;
+  Vector3 normal;
+  Color3 ambient;
+  Color3 diffuse;
+  Color3 specular;
+  real_t refractive_index;
+  Color3 texture;
 };
 
-//typedef struct Intersection Intersection;
+typedef struct Intersection Intersection;
 
 class Geometry
 {
@@ -65,6 +74,8 @@ public:
     virtual void render() const = 0;
 
     virtual bool initialize();
+
+    virtual Intersection intersect (Ray& r) const = 0;
 };
 
 
@@ -134,7 +145,7 @@ public:
     void add_material( Material* m );
     void add_mesh( Mesh* m );
     void add_light( const SphereLight& l );
-    
+
 private:
 
     typedef std::vector< SphereLight > SphereLightList;

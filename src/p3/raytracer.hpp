@@ -11,6 +11,8 @@
 #ifndef _462_RAYTRACER_HPP_
 #define _462_RAYTRACER_HPP_
 
+#define MAX_DEPTH 5
+
 #include "math/color.hpp"
 #include "math/random462.hpp"
 #include "p3/photon.hpp"
@@ -34,10 +36,10 @@ public:
 
     bool initialize(Scene* scene, size_t num_samples,
                     size_t width, size_t height);
-    Color3 trace_ray(Ray &ray/*more args*/);
-    
+    Color3 trace_ray(Ray &ray, size_t depth);
+
     bool raytrace(unsigned char* buffer, real_t* max_time);
-    
+
     Color3 trace_pixel(size_t x,
                size_t y,
                size_t width,
@@ -47,7 +49,7 @@ private:
     // the scene to trace
     Scene* scene;
     Projector projector;
-    
+
     // the dimensions of the image to trace
     size_t width, height;
 
@@ -55,7 +57,7 @@ private:
     size_t current_row;
 
     unsigned int num_samples;
-    
+
 };
 
 } /* _462 */
